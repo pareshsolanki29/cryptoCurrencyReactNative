@@ -8,6 +8,9 @@ import ListItem from './components/ListItem';
 // or any pure javascript modules available in npm
 import { Card } from 'react-native-paper';
 import { SAMPLE_DATA } from './assets/data/sampleData';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {getData} from './services/getCryptoService';
 const ListHeader = () => {
   return(
     <>
@@ -19,13 +22,25 @@ const ListHeader = () => {
   )
 }
 export default function App() {
+
+  const [data, setData] = useState([])
+
+
+  useEffect(()=>{
+    const fetchMarketData =async ()=>{
+      const marketData = await getData();
+      setData(marketData);
+    }
+    fetchMarketData();
+  }, [])
+
   return (
     <SafeAreaView style={styles.container}>
  
 
       <FlatList
         keyExtractor={(item) => item.id}
-        data={SAMPLE_DATA}
+        data={data}
         renderItem = {({ item }) => (
           <ListItem
             name = {item.name}

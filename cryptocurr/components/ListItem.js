@@ -5,7 +5,11 @@ const ListItem = ({name, symBol, currentPrice, priceChangePercentage7d, logoURL}
   const priceChangeColor = priceChangePercentage7d>0 ? '#34C759':
 '#FF3B30'  ; 
 return (
-    <TouchableOpacity>
+    <TouchableOpacity style={{
+      flex: 1, 
+      justifyContent: 'center', 
+      alignItems: 'center' 
+    }}>
       <View style={styles.itemWrapper}>
         {/*left side */}
         <View style={styles.leftWrapper}>
